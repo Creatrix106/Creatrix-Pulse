@@ -1,8 +1,0 @@
-{
-  "name": "creatrix-pulse-contract-check",
-  "private": true,
-  "description": "Type-checks real backend responses against the frontend's TypeScript API types (see ../test_contract_typescript.py).",
-  "devDependencies": {
-    "typescript": "5.9.3"
-  }
-}
