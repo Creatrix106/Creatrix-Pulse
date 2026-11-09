@@ -1,0 +1,48 @@
+# Local stack: PostgreSQL 18 + the API.   docker compose up --build
+# Values come from ./.env (copy .env.example) with the defaults below.
+name: creatrix-pulse
+
+services:
+  db:
+    # PostgreSQL 18 is the latest stable major. 19 reaches GA on 2026-11-19: set POSTGRES_VERSION=19 for a fresh
+    # database (an existing 18 volume must be upgraded with pg_dump/pg_restore or pg_upgrade first).
+    image: postgres:${POSTGRES_VERSION:-18}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-app_db}
+    volumes:
+      # Since the 18 images PGDATA lives in a version-specific sub-directory of /var/lib/postgresql, and that is
+      # where the volume must be mounted (mounting /var/lib/postgresql/data would not persist anything).
+      - pgdata:/var/lib/postgresql
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # (a password containing special characters must be URL-encoded here)
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-app_db}
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      API_PREFIX: ${API_PREFIX:-/api}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      COOKIE_SAMESITE: ${COOKIE_SAMESITE:-lax}
+      DEFAULT_CURRENCY: ${DEFAULT_CURRENCY:-INR}
+      DEFAULT_LOCALE: ${DEFAULT_LOCALE:-en-IN}
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-2}
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
