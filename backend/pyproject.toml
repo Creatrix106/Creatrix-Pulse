@@ -8,7 +8,7 @@ dependencies = [
     # --- web framework -------------------------------------------------------
     "fastapi>=0.162.0,<0.163",
     "uvicorn>=0.54.0,<0.55",
-    "uvloop>=0.23.0",          # fast event loop (explicit instead of uvicorn[standard], which pulls PyYAML)
+    "uvloop>=0.23.0; sys_platform != 'win32'",          # fast event loop (explicit instead of uvicorn[standard], which pulls PyYAML)
     "httptools>=0.9.0",        # fast HTTP parser for uvicorn
     "python-multipart>=0.0.33",  # multipart/form-data uploads
     "pydantic>=2.14.3,<3",
