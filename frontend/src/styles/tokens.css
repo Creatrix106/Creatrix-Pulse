@@ -1,0 +1,141 @@
+/*
+ * Creatrix Pulse design tokens.
+ * Single source of truth for colors, typography, spacing, radii, shadows,
+ * transitions and layout dimensions. Components consume these through the
+ * Tailwind utilities mapped in `globals.css` (bg-surface, text-muted, ...).
+ * Dark mode only overrides the color/shadow tokens.
+ */
+:root {
+  /* Surfaces */
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f6f8fc;
+  --surface-accent: #eaf0f8;
+  --overlay: rgba(16, 42, 86, 0.45);
+
+  /* Lines */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* Text */
+  --foreground: #172b4d;
+  --muted: #64748b;
+  --emphasis: #102a56;
+
+  /* Brand */
+  --primary: #102a56;
+  --primary-hover: #0b1f42;
+  --primary-foreground: #ffffff;
+  --accent: #315f9e;
+  --accent-soft: #eaf0f8;
+  --ring: #315f9e;
+
+  /* Status */
+  --success: #15803d;
+  --success-soft: #e7f5ec;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+  --warning: #b45309;
+  --warning-soft: #fdf3e3;
+
+  /* Navigation (always navy) */
+  --sidebar-bg: #102a56;
+  --sidebar-fg: #c6d4ea;
+  --sidebar-muted: #7f98c0;
+  --sidebar-active: #21447f;
+  --sidebar-border: rgba(255, 255, 255, 0.09);
+
+  /* Chart palette */
+  --chart-1: #315f9e;
+  --chart-2: #102a56;
+  --chart-3: #7ea2d4;
+  --chart-4: #3e9aa0;
+  --chart-5: #d49a3a;
+  --chart-6: #94a3b8;
+  --chart-grid: #e8edf4;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+
+  /* Elevation */
+  --elevation-1: 0 1px 2px rgba(16, 42, 86, 0.06);
+  --elevation-2: 0 4px 14px rgba(16, 42, 86, 0.08);
+  --elevation-3: 0 18px 48px rgba(16, 42, 86, 0.18);
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --topbar-height: 64px;
+  --page-max-width: 1480px;
+  --space-page-x: 1rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --space-page-x: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --space-page-x: 2rem;
+  }
+}
+
+.dark {
+  --background: #091630;
+  --surface: #0e1f40;
+  --surface-muted: #0b1a36;
+  --surface-accent: #15294f;
+  --overlay: rgba(2, 8, 20, 0.65);
+
+  --border: #213459;
+  --border-strong: #2d4574;
+
+  --foreground: #e4ecf8;
+  --muted: #94a5c2;
+  --emphasis: #dbe6f7;
+
+  --primary: #3d6db5;
+  --primary-hover: #4a7bc4;
+  --primary-foreground: #ffffff;
+  --accent: #7fa5e0;
+  --accent-soft: #15294f;
+  --ring: #7fa5e0;
+
+  --success: #4ade80;
+  --success-soft: rgba(74, 222, 128, 0.12);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.12);
+
+  --sidebar-bg: #071226;
+  --sidebar-fg: #bccbe4;
+  --sidebar-muted: #6f86ad;
+  --sidebar-active: #17305d;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+
+  --chart-1: #6f9ee0;
+  --chart-2: #b7cdf1;
+  --chart-3: #3f6cb0;
+  --chart-4: #5bbcc1;
+  --chart-5: #e0ae55;
+  --chart-6: #8393ad;
+  --chart-grid: #1b2d50;
+
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --elevation-2: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --elevation-3: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
